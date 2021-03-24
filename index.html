@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <link rel="stylesheet" href="scss/all.css">
+  <script src="https://kit.fontawesome.com/c974c9c367.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="wrap">
+    <section class="addTicketPanel d-flex flex-wrap ai-center jc-evenly">
+      <div class="addTicketImg">
+        <img src="img/undraw_Traveling_re_weve (1)/undraw_Traveling_re_weve (1)@2x.png" alt="">
+        <img src="img/Let’s Travel !/Let’s Travel !@2x.png" alt="">
+      </div>
+      <form action="index.html" class="addTicketForm">
+        <h1 class="text-primary fz-lg mb-5"><span class="addIcon"><i class="fas fa-plus-circle"></i></span>新增旅遊套票</h1>
+        <div class="form-group d-flex flex-wrap jc-between ai-center text-primary mb-3">
+          <label for="ticketName">套票名稱</label>
+          <input type="text" placeholder="請填寫套票名稱" id="ticketName" class="addTicketInput">
+          <p class="check checkName">不可為空</p>
+        </div>
+        <div class="form-group d-flex flex-wrap jc-between ai-center text-primary mb-3">
+          <label for="ticketUrl">圖片網址</label>
+          <input type="url" placeholder="請填寫圖片網址" id="ticketUrl" class="addTicketInput">
+          <p class="check checkUrl">不可為空</p>
+        </div>
+        <div class="form-group d-flex flex-wrap jc-between ai-center text-primary mb-3">
+          <label for="ticketArea">景點地區</label>
+          <select name="景點地區" id="ticketArea">
+            <option value disabled selected hidden>請選擇景點地區</option>
+            <option value="台北">台北</option>
+            <option value="台中">台中</option>
+            <option value="高雄">高雄</option>
+          </select>
+          <p class="check checkArea">不可為空</p>
+        </div>
+        <div class="form-group d-flex flex-wrap jc-between ai-center text-primary mb-3">
+          <label for="ticketPrice">套票金額</label>
+          <input type="number" placeholder="請填寫套票金額" id="ticketPrice" class="addTicketInput">
+          <p class="check checkPrice">不可為空</p>
+        </div>
+        <div class="form-group d-flex flex-wrap jc-between ai-center text-primary mb-3">
+          <label for="ticketNum">套票組數</label>
+          <input type="number" placeholder="請填寫套票組數" id="ticketNum" class="addTicketInput">
+          <p class="check checkNum">不可為空</p>
+        </div>
+        <div class="form-group d-flex flex-wrap jc-between ai-center text-primary mb-3">
+          <label for="ticketStar">套票星級</label>
+          <input type="number" placeholder="請填寫套票星級" min="1" max="10" id="ticketStar" class="addTicketInput">
+          <p class="check checkStar">不可為空</p>
+        </div>
+        <div class="form-group d-flex flex-wrap jc-between text-primary mb-4">
+          <label for="ticketDescrip">套票描述</label>
+          <textarea name="套票描述" id="ticketDescrip" class="addTicketInput" placeholder="請填寫套票描述（限 100 字）"></textarea>
+          <p class="check checkDescrip">不可為空</p>
+        </div>
+        <input type="button" value="新增套票" class="addTicketBtn bg-primary fz-md">
+      </form>
+    </section>
+
+    <section class="ticketShow">
+      <div class="areaFilter d-flex ai-center">
+        <select name="" id="areaSearch">
+          <option value="地區搜尋" disabled selected hidden>地區搜尋</option>
+          <option value="全部地區">全部地區</option>
+          <option value="台北">台北</option>
+          <option value="台中">台中</option>
+          <option value="高雄">高雄</option>
+        </select>
+        <p>本次搜尋共 <span class="searchResult"></span> 筆資料</p>
+      </div>
+      <ul class="ticketList d-flex flex-wrap">
+        
+      </ul>
+    </section>
+  </div>
+
+  <script src="all.js"></script>
+</body>
+</html>

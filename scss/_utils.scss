@@ -1,0 +1,58 @@
+//flex
+.d-flex {
+  display: flex;
+}
+.jc-between {
+  justify-content: space-between;
+}
+.jc-evenly {
+  justify-content: space-evenly;
+}
+.jc-end {
+  justify-content: end;
+}
+.ai-center {
+  align-items: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+//colors
+$primary: #00807e;
+$secondary: #64c3bf;
+$gray: #f7f7f7;
+$dark-gray: #818a91;
+.text-primary {
+  color: $primary;
+}
+.text-dGray {
+  color: $dark-gray;
+}
+.bg-primary {
+  background: $primary;
+  color: white;
+}
+.bg-secondary {
+  background: $secondary;
+  color: white;
+}
+//font-size
+.fz-md {
+  font-size: 20px;
+}
+.fz-lg {
+  font-size: 24px;
+}
+.fz-xl {
+  font-size: 32px;
+}
+//spacing
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+.mb-5 {
+  margin-bottom: 2rem;
+}

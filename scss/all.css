@@ -299,6 +299,18 @@ a {
 }
 
 .addTicketForm .form-group .check {
+  font-size: 12px;
+  color: red;
+  margin-left: 100px;
+}
+
+.addTicketForm .form-group .checkName,
+.addTicketForm .form-group .checkUrl,
+.addTicketForm .form-group .checkArea,
+.addTicketForm .form-group .checkPrice,
+.addTicketForm .form-group .checkNum,
+.addTicketForm .form-group .checkStar,
+.addTicketForm .form-group .checkDescrip {
   display: none;
 }
 

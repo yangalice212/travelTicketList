@@ -118,16 +118,24 @@ function checkAddTicketValue() {
   } else if (addTicketArea.value === "") {
     checkArrTextIsShow();
     checkArea.setAttribute("style", "display:block");
-  } else if (addTicketPrice.value === "" || isNaN(addTicketPrice.value)) {
+  } else if (
+    addTicketPrice.value === "" ||
+    isNaN(addTicketPrice.value) ||
+    addTicketStar.value <= 0
+  ) {
     checkArrTextIsShow();
     checkPrice.setAttribute("style", "display:block");
-  } else if (addTicketNum.value === "" || isNaN(addTicketNum.value)) {
+  } else if (
+    addTicketNum.value === "" ||
+    isNaN(addTicketNum.value) ||
+    addTicketStar.value <= 0
+  ) {
     checkArrTextIsShow();
     checkNum.setAttribute("style", "display:block");
   } else if (
     addTicketStar.value === "" ||
     isNaN(addTicketStar.value) ||
-    addTicketStar.value < 0 ||
+    addTicketStar.value <= 0 ||
     addTicketStar.value > 10
   ) {
     checkArrTextIsShow();

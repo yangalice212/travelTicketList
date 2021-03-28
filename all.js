@@ -121,14 +121,14 @@ function checkAddTicketValue() {
   } else if (
     addTicketPrice.value === "" ||
     isNaN(addTicketPrice.value) ||
-    addTicketStar.value <= 0
+    addTicketPrice.value <= 0
   ) {
     checkArrTextIsShow();
     checkPrice.setAttribute("style", "display:block");
   } else if (
     addTicketNum.value === "" ||
     isNaN(addTicketNum.value) ||
-    addTicketStar.value <= 0
+    addTicketNum.value <= 0
   ) {
     checkArrTextIsShow();
     checkNum.setAttribute("style", "display:block");
@@ -159,11 +159,7 @@ function checkArrTextIsShow() {
     checkStar,
     checkDescrip,
   ];
-  let checkArr = [];
   checkText.forEach(function (item) {
-    checkArr.push(item);
-  });
-  checkArr.forEach(function (item) {
     item.setAttribute("style", "display: none");
   });
 }

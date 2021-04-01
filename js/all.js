@@ -1,27 +1,28 @@
 let data = [];
 let searchResultNum = 0;
 
-let areaFilter = document.querySelector(".areaFilter select");
-let ticketList = document.querySelector(".ticketList");
-let searchResult = document.querySelector(".searchResult");
+const areaFilter = document.querySelector(".areaFilter select");
+const ticketList = document.querySelector(".ticketList");
+const searchResult = document.querySelector(".searchResult");
 
-let addTicketName = document.querySelector("#ticketName");
-let addTicketUrl = document.querySelector("#ticketUrl");
-let addTicketArea = document.querySelector("#ticketArea");
-let addTicketPrice = document.querySelector("#ticketPrice");
-let addTicketNum = document.querySelector("#ticketNum");
-let addTicketStar = document.querySelector("#ticketStar");
-let addTicketDescrip = document.querySelector("#ticketDescrip");
-let addTicketBtn = document.querySelector(".addTicketBtn");
-// let addTicketInput = document.querySelectorAll(".addTicketInput");
+const addTicketName = document.querySelector("#ticketName");
+const addTicketUrl = document.querySelector("#ticketUrl");
+const addTicketArea = document.querySelector("#ticketArea");
+const addTicketPrice = document.querySelector("#ticketPrice");
+const addTicketNum = document.querySelector("#ticketNum");
+const addTicketStar = document.querySelector("#ticketStar");
+const addTicketDescrip = document.querySelector("#ticketDescrip");
+const addTicketBtn = document.querySelector(".addTicketBtn");
+const addTicketInput = document.querySelectorAll(".addTicketInput");
+const inputList = [...addTicketInput]; //將類陣列轉為純陣列
 
-let checkName = document.querySelector(".checkName");
-let checkUrl = document.querySelector(".checkUrl");
-let checkArea = document.querySelector(".checkArea");
-let checkPrice = document.querySelector(".checkPrice");
-let checkNum = document.querySelector(".checkNum");
-let checkStar = document.querySelector(".checkStar");
-let checkDescrip = document.querySelector(".checkDescrip");
+const checkName = document.querySelector(".checkName");
+const checkUrl = document.querySelector(".checkUrl");
+const checkArea = document.querySelector(".checkArea");
+const checkPrice = document.querySelector(".checkPrice");
+const checkNum = document.querySelector(".checkNum");
+const checkStar = document.querySelector(".checkStar");
+const checkDescrip = document.querySelector(".checkDescrip");
 
 function init() {
   axios
@@ -44,19 +45,50 @@ function renderData() {
 
   ticketList.innerHTML = str;
   searchResult.textContent = searchResultNum;
+  inputList.forEach((i) => {
+    i.value = "";
+  });
+  renderChart();
+}
 
-  //addTicketInput.value = "";
-  addTicketName.value = "";
-  addTicketUrl.value = "";
-  addTicketArea.value = "";
-  addTicketDescrip.value = "";
-  addTicketNum.value = "";
-  addTicketPrice.value = "";
-  addTicketStar.value = "";
+function renderChart() {
+  const totalObj = {};
+  data.forEach(function (item, index) {
+    if (totalObj[item.area] === undefined) {
+      totalObj[item.area] = 1;
+    } else {
+      totalObj[item.area] += 1;
+    }
+  });
+
+  const areaArr = Object.keys(totalObj);
+  let newData = [];
+  areaArr.forEach(function (item, index) {
+    let arr = [];
+    arr.push(item);
+    arr.push(totalObj[item]);
+    newData.push(arr);
+  });
+
+  let chart = c3.generate({
+    bindto: ".chart",
+    data: {
+      columns: newData,
+      type: "donut",
+      colors: {
+        台北: "#26C0C7",
+        台中: "#5151D3",
+        高雄: "#E68618",
+      },
+    },
+    donut: {
+      title: "套票地區比重",
+    },
+  });
 }
 
 function showData(item) {
-  let str = `<li class="ticketListItem">
+  const str = `<li class="ticketListItem">
               <div class="ticketArea bg-secondary">${item.area}</div>
               <div class="ticketImg">
                 <a href=""><img src="${item.imgUrl}" alt=""></a>
@@ -150,7 +182,7 @@ function checkAddTicketValue() {
 }
 
 function checkArrTextIsShow() {
-  let checkText = [
+  const checkText = [
     checkName,
     checkUrl,
     checkArea,

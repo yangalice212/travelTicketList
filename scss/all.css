@@ -342,6 +342,16 @@ a {
   margin: 0 auto;
   color: #818a91;
   margin-bottom: 52px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .ticketShow .areaFilter {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .ticketShow .areaFilter select {
@@ -350,6 +360,27 @@ a {
   padding: 8px 12px;
   color: #818a91;
   margin-right: 30px;
+}
+
+.ticketShow .areaFilter .chart {
+  width: 350px;
+  height: 160px;
+  margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .ticketShow .areaFilter .chart {
+    margin-left: auto;
+    margin-top: 0;
+  }
+}
+
+.ticketShow .areaFilter .chart .c3-chart-arcs-title {
+  font-size: 10px;
+}
+
+.ticketShow .areaFilter .chart .c3-chart-arc text {
+  display: none;
 }
 
 .ticketShow .ticketList {

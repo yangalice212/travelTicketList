@@ -94,12 +94,31 @@
     margin: 0 auto;
     color: #818a91;
     margin-bottom: 52px;
+    flex-wrap: wrap;
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
     select {
       width: 27.5%;
       border: none;
       padding: 8px 12px;
       color: #818a91;
       margin-right: 30px;
+    }
+    .chart {
+      width: 350px;
+      height: 160px;
+      margin-top: 10px;
+      @media (min-width: 768px) {
+        margin-left: auto;
+        margin-top: 0;
+      }
+      .c3-chart-arcs-title {
+        font-size: 10px;
+      }
+      .c3-chart-arc text {
+        display: none;
+      }
     }
   }
   .ticketList {

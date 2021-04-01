@@ -81,8 +81,16 @@ function renderChart() {
         高雄: "#E68618",
       },
     },
+    size: {
+      width: 200,
+      height: 160,
+    },
     donut: {
       title: "套票地區比重",
+      width: 10,
+      label: {
+        show: false,
+      },
     },
   });
 }

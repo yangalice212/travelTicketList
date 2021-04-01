@@ -363,8 +363,6 @@ a {
 }
 
 .ticketShow .areaFilter .chart {
-  width: 350px;
-  height: 160px;
   margin-top: 10px;
 }
 
@@ -373,14 +371,6 @@ a {
     margin-left: auto;
     margin-top: 0;
   }
-}
-
-.ticketShow .areaFilter .chart .c3-chart-arcs-title {
-  font-size: 10px;
-}
-
-.ticketShow .areaFilter .chart .c3-chart-arc text {
-  display: none;
 }
 
 .ticketShow .ticketList {

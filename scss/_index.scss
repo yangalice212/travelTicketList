@@ -106,19 +106,19 @@
       margin-right: 30px;
     }
     .chart {
-      width: 350px;
-      height: 160px;
+      // width: 350px;
+      // height: 160px;
       margin-top: 10px;
       @media (min-width: 768px) {
         margin-left: auto;
         margin-top: 0;
       }
-      .c3-chart-arcs-title {
-        font-size: 10px;
-      }
-      .c3-chart-arc text {
-        display: none;
-      }
+      // .c3-chart-arcs-title {
+      //   font-size: 10px;
+      // }
+      // .c3-chart-arc text {
+      //   display: none;
+      // }
     }
   }
   .ticketList {

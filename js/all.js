@@ -5,25 +5,77 @@ const areaFilter = document.querySelector(".areaFilter select");
 const ticketList = document.querySelector(".ticketList");
 const searchResult = document.querySelector(".searchResult");
 
-const addTicketName = document.querySelector("#ticketName");
-const addTicketUrl = document.querySelector("#ticketUrl");
-const addTicketArea = document.querySelector("#ticketArea");
-const addTicketPrice = document.querySelector("#ticketPrice");
-const addTicketNum = document.querySelector("#ticketNum");
-const addTicketStar = document.querySelector("#ticketStar");
-const addTicketDescrip = document.querySelector("#ticketDescrip");
+const addTicketName = document.querySelector(".ticketName");
+const addTicketUrl = document.querySelector(".ticketUrl");
+const addTicketArea = document.querySelector(".ticketArea");
+const addTicketPrice = document.querySelector(".ticketPrice");
+const addTicketNum = document.querySelector(".ticketNum");
+const addTicketRate = document.querySelector(".ticketRate");
+const addTicketDescrip = document.querySelector(".ticketDescrip");
 const addTicketBtn = document.querySelector(".addTicketBtn");
-const addTicketInput = document.querySelectorAll(".addTicketInput");
-const inputList = [...addTicketInput]; //將類陣列轉為純陣列
+// const addTicketInput = document.querySelectorAll(".addTicketInput");
+// const inputList = [...addTicketInput]; //將類陣列轉為純陣列
+const ticketForm = document.querySelector(".addTicketForm");
+const inputs = document.querySelectorAll(
+  ".addTicketForm input[type=text],input[type=url],input[type=number],select.ticketArea,textarea"
+);
+//驗證條件&警示訊息
+const constraints = {
+  ticketName: {
+    presence: {
+      message: "必填",
+    },
+  },
+  ticketUrl: {
+    presence: {
+      message: "必填",
+    },
+    url: {
+      schemes: ["http", "https"],
+      message: "必須是正確的網址",
+    },
+  },
+  ticketArea: {
+    presence: {
+      message: "必填",
+    },
+  },
+  ticketPrice: {
+    presence: {
+      message: "必填",
+    },
+    numericality: {
+      greaterThan: 0,
+      message: "必須大於 0",
+    },
+  },
+  ticketNum: {
+    presence: {
+      message: "必填",
+    },
+    numericality: {
+      greaterThan: 0,
+      message: "必須大於 0",
+    },
+  },
+  ticketRate: {
+    presence: {
+      message: "必填",
+    },
+    numericality: {
+      greaterThanOrEqualTo: 1,
+      lessThanOrEqualTo: 10,
+      message: "必須在 1-10 的區間",
+    },
+  },
+  ticketDescrip: {
+    presence: {
+      message: "必填",
+    },
+  },
+};
 
-const checkName = document.querySelector(".checkName");
-const checkUrl = document.querySelector(".checkUrl");
-const checkArea = document.querySelector(".checkArea");
-const checkPrice = document.querySelector(".checkPrice");
-const checkNum = document.querySelector(".checkNum");
-const checkStar = document.querySelector(".checkStar");
-const checkDescrip = document.querySelector(".checkDescrip");
-
+//初始化
 function init() {
   axios
     .get(
@@ -34,36 +86,42 @@ function init() {
       renderData();
     });
 }
-
+//渲染資料
 function renderData() {
   let str = "";
   searchResultNum = 0;
-  data.forEach(function (item, index) {
+  data.forEach(function (item) {
     str += showData(item);
     searchResultNum++;
   });
-
   ticketList.innerHTML = str;
   searchResult.textContent = searchResultNum;
-  inputList.forEach((i) => {
+  //清空input
+  inputs.forEach((i) => {
     i.value = "";
   });
   renderChart();
 }
-
+//chart.js
 function renderChart() {
+  //各地區資料數存入物件
   const totalObj = {};
-  data.forEach(function (item, index) {
+  //{高熊:2,台北:1,台中:1}
+  data.forEach(function (item) {
+    //當地區名不存在於物件則指派為1
     if (totalObj[item.area] === undefined) {
       totalObj[item.area] = 1;
     } else {
+      //存在的話就+1
       totalObj[item.area] += 1;
     }
   });
-
+  //將所有屬性撈出變為一個陣列
   const areaArr = Object.keys(totalObj);
+  //areaArr = ["高雄","台北","台中"]
   let newData = [];
-  areaArr.forEach(function (item, index) {
+  //newData = [["高雄",2],["台北",1],["台中",1]]
+  areaArr.forEach(function (item) {
     let arr = [];
     arr.push(item);
     arr.push(totalObj[item]);
@@ -102,7 +160,7 @@ function showData(item) {
                 <a href=""><img src="${item.imgUrl}" alt=""></a>
               </div>
               <div class="ticketInfo">
-                <div class="ticketStar bg-primary">${item.rate}</div>
+                <div class="ticketRate bg-primary">${item.rate}</div>
                 <h3 class="fz-lg mb-3"><a href="#" class="text-primary">${item.name}</a></h3>
                 <p class="ticketDescrip text-dGray mb-5">
                   ${item.description}
@@ -115,7 +173,7 @@ function showData(item) {
             </li>`;
   return str;
 }
-
+//篩選地區
 function filter() {
   let str = "";
   let arr = [];
@@ -133,77 +191,55 @@ function filter() {
   ticketList.innerHTML = str;
   searchResult.textContent = searchResultNum;
 }
-
+//將新增套票資訊加入物件中，並加到 data 陣列
 function addTicket() {
   let obj = {};
   obj.id = data.length;
-  obj.name = addTicketName.value;
-  obj.imgUrl = addTicketUrl.value;
-  obj.area = addTicketArea.value;
-  obj.description = addTicketDescrip.value;
-  obj.group = addTicketNum.value;
-  obj.price = addTicketPrice.value;
-  obj.rate = addTicketStar.value;
+  obj.name = ticketName.value;
+  obj.imgUrl = ticketUrl.value;
+  obj.area = ticketArea.value;
+  obj.price = Number(ticketPrice.value);
+  obj.group = Number(ticketNum.value);
+  obj.rate = Number(ticketRate.value);
+  obj.description = ticketDescrip.value;
   data.push(obj);
   renderData();
 }
-
-function checkAddTicketValue() {
-  if (addTicketName.value === "") {
-    checkArrTextIsShow();
-    checkName.setAttribute("style", "display:block");
-  } else if (addTicketUrl.value === "") {
-    checkArrTextIsShow();
-    checkUrl.setAttribute("style", "display:block");
-  } else if (addTicketArea.value === "") {
-    checkArrTextIsShow();
-    checkArea.setAttribute("style", "display:block");
-  } else if (
-    addTicketPrice.value === "" ||
-    isNaN(addTicketPrice.value) ||
-    addTicketPrice.value <= 0
-  ) {
-    checkArrTextIsShow();
-    checkPrice.setAttribute("style", "display:block");
-  } else if (
-    addTicketNum.value === "" ||
-    isNaN(addTicketNum.value) ||
-    addTicketNum.value <= 0
-  ) {
-    checkArrTextIsShow();
-    checkNum.setAttribute("style", "display:block");
-  } else if (
-    addTicketStar.value === "" ||
-    isNaN(addTicketStar.value) ||
-    addTicketStar.value <= 0 ||
-    addTicketStar.value > 10
-  ) {
-    checkArrTextIsShow();
-    checkStar.setAttribute("style", "display:block");
-  } else if (addTicketDescrip.value === "") {
-    checkArrTextIsShow();
-    checkDescrip.setAttribute("style", "display:block");
-  } else {
-    addTicket();
-    checkArrTextIsShow();
-  }
+//change驗證表單
+function checkInputValue() {
+  inputs.forEach(function (item) {
+    item.addEventListener("change", function () {
+      item.nextElementSibling.textContent = "";
+      let errors = validate(ticketForm, constraints);
+      if (errors) {
+        let arr = Object.keys(errors);
+        arr.forEach(function (key) {
+          document.querySelector(`p.${key}`).textContent = errors[key];
+        });
+      }
+    });
+  });
 }
 
-function checkArrTextIsShow() {
-  const checkText = [
-    checkName,
-    checkUrl,
-    checkArea,
-    checkPrice,
-    checkNum,
-    checkStar,
-    checkDescrip,
-  ];
-  checkText.forEach(function (item) {
-    item.setAttribute("style", "display: none");
+function btnCheck() {
+  let check = false;
+  inputs.forEach((i) => {
+    let errors = validate(ticketForm, constraints);
+    if (errors) {
+      Object.keys(errors).forEach(function (keys) {
+        document.querySelector(`p.${keys}`).textContent = errors[keys];
+      });
+      check = false;
+    } else {
+      check = true;
+    }
+    checkInputValue();
   });
+  if (check) {
+    addTicket();
+  }
 }
 
 init();
 areaFilter.addEventListener("change", filter);
-addTicketBtn.addEventListener("click", checkAddTicketValue);
+addTicketBtn.addEventListener("click", btnCheck);

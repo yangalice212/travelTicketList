@@ -53,19 +53,10 @@
     textarea {
       min-height: 111px;
     }
-    .check {
+    .ticket {
       font-size: 12px;
       color: red;
       margin-left: 100px;
-    }
-    .checkName,
-    .checkUrl,
-    .checkArea,
-    .checkPrice,
-    .checkNum,
-    .checkStar,
-    .checkDescrip {
-      display: none;
     }
     @include mobile-sm {
       label,
@@ -106,19 +97,11 @@
       margin-right: 30px;
     }
     .chart {
-      // width: 350px;
-      // height: 160px;
       margin-top: 10px;
       @media (min-width: 768px) {
         margin-left: auto;
         margin-top: 0;
       }
-      // .c3-chart-arcs-title {
-      //   font-size: 10px;
-      // }
-      // .c3-chart-arc text {
-      //   display: none;
-      // }
     }
   }
   .ticketList {
@@ -159,7 +142,7 @@
     .ticketInfo {
       padding: 20px 20px 25px;
       position: relative;
-      .ticketStar {
+      .ticketRate {
         position: absolute;
         top: -15px;
         left: 0;
